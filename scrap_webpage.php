@@ -108,6 +108,8 @@
                 //no cookies: no page
                 curl_setopt($s, CURLOPT_COOKIEFILE, $this->config['cookie_file']); 
                 curl_setopt($s, CURLOPT_COOKIEJAR, $this->config['cookie_file']);
+
+                
                 curl_setopt($s, CURLOPT_RETURNTRANSFER, 1);
                 //redirection
                 curl_setopt($s, CURLOPT_FOLLOWLOCATION, true); 
@@ -227,6 +229,8 @@
             else {
                 echo 'Warning ! Version of PHP < ' . $PHPVersionMajor . '. Might not run properly' . PHP_EOL;
             }
+
+            echo 'Permissions for this folder are : ' . substr(sprintf('%o', fileperms('/tmp')), -4) . ' Make sur PHP can write to it' . PHP_EOL;
 
         }
 
