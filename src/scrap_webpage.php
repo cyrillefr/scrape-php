@@ -1,4 +1,10 @@
 <?php 
+    
+    /**
+    * @author cyrillefr
+    *
+    */
+
 
     $usageMsg = 'Usage: php ' . basename(__FILE__) . ' run|test ';
 
@@ -235,9 +241,4 @@
         }
 
 
-
-
-
     }
-
-?>
