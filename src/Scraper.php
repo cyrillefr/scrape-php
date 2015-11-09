@@ -19,8 +19,8 @@
 
 
     /* 2 modes
-    run launches the app
-    test launches tests
+    *run launches the app
+    *test launches tests
     */
     switch ($argument) {
         case 'run':
@@ -71,9 +71,9 @@
     }
 
     /**
-    Main class
+    *Main class
     */
-    class scraper {
+    class Scraper {
 
         private $config; 
         //local curl utility
@@ -83,6 +83,10 @@
         public function __construct(){
             $this->config = conf::getConf();
         }
+
+        public function scrape($content){
+            $content->getContent();
+        } 
 
 
         public function run(){
