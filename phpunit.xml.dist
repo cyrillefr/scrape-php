@@ -1,0 +1,7 @@
+<phpunit bootstrap="test/bootstrap.php">
+    <testsuites>
+        <testsuite name="Scraper Test Suite">
+            <directory>test/Cyrillefr/Scraper/Tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
