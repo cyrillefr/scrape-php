@@ -132,31 +132,6 @@
         public function test()
         {
 
-            //test curl is installed
-            if (function_exists('curl_init')) {
-                echo "OK Curl functions are available." . PHP_EOL;
-            } 
-            else {
-                echo "KO ! Curl functions are not available" . PHP_EOL;
-            }
-
-            $filename = './scrap.ini';
-
-            if (file_exists($filename)) {
-                echo 'OK ' . basename($filename) . ' is available.' . PHP_EOL;
-            } 
-            else {
-                echo 'KO ! ' . basename($filename) . ' is not available.' . PHP_EOL;
-            }
-
-            $PHPVersionMajor = substr(phpversion(), 0, 3);
-            if ($PHPVersionMajor >= 5.4){
-                echo 'OK Version of PHP >=' . $PHPVersionMajor . PHP_EOL;
-            } 
-            else {
-                echo 'Warning ! Version of PHP < ' . $PHPVersionMajor . '. Might not run properly' . PHP_EOL;
-            }
-
             echo 'Permissions for this folder are : ' . substr(sprintf('%o', fileperms('/tmp')), -4) . ' Make sur PHP can write to it' . PHP_EOL;
 
         }
