@@ -19,7 +19,7 @@
         }        
 
 
-        public function testFailure()
+        public function testConfFileExists()
         {
             $this->assertFileExists('scrap.ini');
         }
