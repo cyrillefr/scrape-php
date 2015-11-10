@@ -1,92 +1,26 @@
 <?php 
-    
-    /**
-    * @author cyrillefr
-    *
-    */
 
+     namespace Cyrillefr\Scraper;
 
-    $usageMsg = 'Usage: php ' . basename(__FILE__) . ' run|test ';
-
-    //Usage: one argument only
-    if ($argc !== 2) {
-        echo $usageMsg . PHP_EOL;
-        exit(1);
-    }
-
-    //argument passed
-    $argument = $argv[1];
-
-
-    /* 2 modes
-    *run launches the app
-    *test launches tests
-    */
-    switch ($argument) {
-        case 'run':
-            command::run();
-            break;
-
-        case 'test':
-            command::test();
-            break;
-        
-        default:
-            echo $usageMsg . PHP_EOL;
-            exit(1);
-            break;
-    }
+     use Cyrillefr\Content;
+     use Cyrillefr\Scraper\CURLService;
+     use Cyrillefr\config\Config;
+   
 
     /**
-    * Utility command class
-    */
-    class command {
-
-        private static $scraper;
-
-        private function getScraper(){
-            self::$scraper = new scraper();
-            return self::$scraper;
-        }
-
-        public static function run(){
-            self::getScraper()->run();
-        }
-
-        public static function test(){
-            self::getScraper()->test();
-        }
-    }
-
-
-    /*
-    * Utility conf class
-    */
-    class conf {
-
-        static function getConf(){
-            return parse_ini_file('scrap.ini');
-        }
-
-    }
-
-    /**
-    *Main class
+    * 
     */
     class Scraper {
 
-        private $config; 
-        //local curl utility
-        private $userAgent = 'curl/7.38.0';
+        
+        /**
+         * @var string $content html string 
+         */
+        private $content;  
 
 
         public function __construct(){
-            $this->config = conf::getConf();
         }
-
-        public function scrape($content){
-            $content->getContent();
-        } 
 
 
         public function run(){
@@ -95,8 +29,13 @@
             $results = [];
 
             try {
+
+                $content = new Content(Config::get('url_to_scrap'));
+
+                $response = $content->getStringContent();
+
                 //connect
-                $response  = self::connect($this->config['url_to_scrap']);
+                //$response  = self::connect($this->config['url_to_scrap']);
 
                 //fetch array of results
                 $results = self::getElements($response);
@@ -110,29 +49,7 @@
             echo json_encode($results);
         }
 
-        //curl GET
-        private function connect($url){
-                $s = curl_init(); 
-                curl_setopt($s, CURLOPT_URL, $url);
-
-                //no cookies: no page
-                curl_setopt($s, CURLOPT_COOKIEFILE, $this->config['cookie_file']); 
-                curl_setopt($s, CURLOPT_COOKIEJAR, $this->config['cookie_file']);
-
-                
-                curl_setopt($s, CURLOPT_RETURNTRANSFER, 1);
-                //redirection
-                curl_setopt($s, CURLOPT_FOLLOWLOCATION, true); 
-                curl_setopt($s, CURLOPT_USERAGENT, $this->userAgent);
-                $response = curl_exec ($s);
-                curl_close($s);
-
-
-                if($response == '')
-                    throw new Exception ('Could not reach url.');
-
-                return $response;
-        }
+        
 
         private function getElements($response){
 
@@ -212,6 +129,7 @@
         }
 
 
+        //REFACTOR !!! -> PHPUnit
         public function test()
         {
 

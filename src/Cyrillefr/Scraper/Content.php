@@ -7,36 +7,20 @@
     Class Content
     {
 
-        /**
-         * @var string $url 
-         */
-        private $url;
 
-        /**
-         * @var 
-         */
         private $CURLService;
+        private $url;
 
        
         public function __construct($url)
         {
             $this->url = $url;
+            $this->CURLService = new $CURLService();
         }
 
 
-        
-
-        Constructeur: une url et une classe
-
-
-        //fn return content
-        //Fait appel classe curl
-        //Qui decide de faire appel a classe curl ou assimilé ?
-
-       
-
         public function getStringContent(){
-            //execute cURL
+            return $this->CURLService->http_get($this->url);
         }
 
     }
