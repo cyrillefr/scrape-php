@@ -2,7 +2,7 @@
 
      namespace Cyrillefr\Scraper;
 
-     use Cyrillefr\Content;
+     use Cyrillefr\Scraper\Content;
      use Cyrillefr\Scraper\CURLService;
      use Cyrillefr\config\Config;
    
@@ -19,7 +19,8 @@
         private $content;  
 
 
-        public function __construct(){
+        public function __construct()
+        {
         }
 
 
@@ -30,18 +31,16 @@
 
             try {
 
-                $content = new Content(Config::get('url_to_scrap'));
+                $content = new Content(Config::get('url_to_scrap')); 
 
                 $response = $content->getStringContent();
 
-                //connect
-                //$response  = self::connect($this->config['url_to_scrap']);
 
                 //fetch array of results
                 $results = self::getElements($response);
 
             }
-            catch (Exception $e) {
+            catch (\Exception $e) {
                 $results['results'] = 'Exception: ' . $e->getMessage();
             } 
    

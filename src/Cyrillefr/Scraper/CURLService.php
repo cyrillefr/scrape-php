@@ -2,7 +2,8 @@
 
     namespace Cyrillefr\Scraper;
 
-    
+    use Cyrillefr\config\Config;    
+
 
     Class CURLService
     {
@@ -14,11 +15,13 @@
         private $url;
 
 
-        public function __construct(){
+        public function __construct()
+        {
         }
 
         //curl GET
-        public function http_get($url){
+        public function http_get($url)
+        {
                 $s = curl_init(); 
                 curl_setopt($s, CURLOPT_URL, $url);
 
@@ -36,7 +39,9 @@
 
 
                 if($response == '')
-                    throw new Exception ('Could not reach url.');
+                {
+                    throw new \Exception ('Could not reach url.');
+                }
 
                 return $response;
         }

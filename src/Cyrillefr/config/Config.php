@@ -2,23 +2,26 @@
 
     namespace Cyrillefr\config;
 
-    class Config {
+    class Config
+    {
 
 
-        private $arr_of_keys_conf;
+        private static $arr_of_keys_conf;
 
         /**
          * $conf = Config::get(key)
          *
          */
-        static function get($key){
+        static function get($key)
+        {
 
-            if (! isset($this->arr_of_keys_conf))
+            if (! isset(self::$arr_of_keys_conf))
             {
-                $this->arr_of_keys_conf = parse_ini_file('scrap.ini');
+                //$this->arr_of_keys_conf = parse_ini_file('scrap.ini');
+                self::$arr_of_keys_conf = parse_ini_file('scrap.ini');
             }
 
-            return $this->arr_of_keys_conf;
+            return self::$arr_of_keys_conf;
         }
 
     }
