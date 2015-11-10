@@ -1,0 +1,14 @@
+{
+  "name": "cyrillefr/scrape-php",
+  "description": "A simple drill",
+  "require": {
+    "php": ">=5.3,<5.6,",
+    "phpunit/phpunit": "4.8"
+  },
+  "autoload": {
+        "psr-4": {
+            "": "src",
+            "Cyrillefr\\Scraper\\Tests\\": "tests/"
+        }
+    },
+}
